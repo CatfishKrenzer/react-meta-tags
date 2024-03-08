@@ -1,18 +1,16 @@
 {
-  "name": "react-meta-tags",
+  "name": "@catfishkrenzer/react-meta-tags",
   "description": "Handle document meta/head tags in isomorphic react with ease.",
   "version": "1.0.1",
   "main": "lib/index.js",
-  "author": "Sudhanshu Yadav",
   "license": "MIT",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/s-yadav/react-meta-tags"
+    "url": "git+https://github.com/CatfishKrenzer/react-meta-tags.git"
   },
   "bugs": {
-    "mail": "sudhanshuyadav2@gmail.com",
-    "url": "https://github.com/s-yadav/react-meta-tags/issues"
+    "url": "https://github.com/CatfishKrenzer/react-meta-tags/issues"
   },
   "keywords": [
     "react-component",
@@ -65,5 +63,11 @@
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.2"
-  }
+  },
+  "homepage": "https://github.com/CatfishKrenzer/react-meta-tags#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "devDependencies": {}
 }
