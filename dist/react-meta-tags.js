@@ -1,42 +1,68 @@
 /**
  * react-meta-tags - 1.0.1
  * Author : Sudhanshu Yadav
- * Copyright (c) 2016, 2020 to Sudhanshu Yadav, released under the MIT license.
+ * Copyright (c) 2016, 2024 to Sudhanshu Yadav, released under the MIT license.
  * https://github.com/s-yadav/react-meta-tags
  */
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
-  (factory((global.MetaTags = {}),global.React,global.ReactDOM));
-}(this, (function (exports,React,ReactDOM) { 'use strict';
+  (global = global || self, factory(global.MetaTags = {}, global.React, global.ReactDOM));
+}(this, (function (exports, React, ReactDOM) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
-  ReactDOM = ReactDOM && ReactDOM.hasOwnProperty('default') ? ReactDOM['default'] : ReactDOM;
+  ReactDOM = ReactDOM && Object.prototype.hasOwnProperty.call(ReactDOM, 'default') ? ReactDOM['default'] : ReactDOM;
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -47,15 +73,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -63,70 +86,63 @@
         configurable: true
       }
     });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
-
     return _setPrototypeOf(o, p);
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
 
-  var MetaContext = React.createContext({});
+  var MetaContext = /*#__PURE__*/React.createContext({});
+
   /** context class which passes extract fuunction to MetaTags Component **/
-
-  var MetaContextProviderWrapper =
-  /*#__PURE__*/
-  function (_Component) {
+  var MetaContextProviderWrapper = /*#__PURE__*/function (_Component) {
     _inherits(MetaContextProviderWrapper, _Component);
-
     function MetaContextProviderWrapper() {
       _classCallCheck(this, MetaContextProviderWrapper);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(MetaContextProviderWrapper).apply(this, arguments));
+      return _callSuper(this, MetaContextProviderWrapper, arguments);
     }
-
     _createClass(MetaContextProviderWrapper, [{
       key: "render",
       value: function render() {
-        return React__default.createElement(MetaContext.Provider, {
+        return /*#__PURE__*/React__default.createElement(MetaContext.Provider, {
           value: {
             extract: this.props.extract
           }
         }, React.Children.only(this.props.children));
       }
     }]);
-
     return MetaContextProviderWrapper;
   }(React.Component);
 
   var uniqueIdentifiersI = ['property', 'name', 'itemprop'];
+
   /**
     Note:
     1. In server side we will add meta tags and title at last after fitering
@@ -140,7 +156,6 @@
       return !meta.id;
     });
   }
-
   function getDuplicateTitle() {
     return document.head.querySelectorAll('title');
   }
@@ -152,45 +167,40 @@
     return id && document.head.querySelector("#".concat(id));
   }
   function getDuplicateMeta(meta) {
-    var head = document.head; //for any other unique identifier check if metas already available with same identifier which doesn't have id
+    var head = document.head;
 
+    //for any other unique identifier check if metas already available with same identifier which doesn't have id
     return uniqueIdentifiersI.reduce(function (duplicates, identifier) {
       var identifierValue = meta.getAttribute(identifier);
       return identifierValue ? duplicates.concat(filterOutMetaWithId(head.querySelectorAll("[".concat(identifier, " = \"").concat(identifierValue, "\"]")))) : duplicates;
     }, []);
-  } //function to append childrens on a parent
+  }
 
+  //function to append childrens on a parent
   function appendChild(parent, childrens) {
     if (childrens.length === undefined) childrens = [childrens];
-    var docFrag = document.createDocumentFragment(); //we used for loop instead of forEach because childrens can be array like object
+    var docFrag = document.createDocumentFragment();
 
+    //we used for loop instead of forEach because childrens can be array like object
     for (var i = 0, ln = childrens.length; i < ln; i++) {
       docFrag.appendChild(childrens[i]);
     }
-
     parent.appendChild(docFrag);
   }
   function removeChild(parent, childrens) {
     if (childrens.length === undefined) childrens = [childrens];
-
     for (var i = 0, ln = childrens.length; i < ln; i++) {
       parent.removeChild(childrens[i]);
     }
   }
 
   /** An wrapper component to wrap element which need to shifted to head **/
-
-  var MetaTags =
-  /*#__PURE__*/
-  function (_Component) {
+  var MetaTags = /*#__PURE__*/function (_Component) {
     _inherits(MetaTags, _Component);
-
     function MetaTags() {
       _classCallCheck(this, MetaTags);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(MetaTags).apply(this, arguments));
+      return _callSuper(this, MetaTags, arguments);
     }
-
     _createClass(MetaTags, [{
       key: "componentDidMount",
       value: function componentDidMount() {
@@ -216,11 +226,9 @@
       value: function extractChildren() {
         var extract = this.context.extract;
         var children = this.props.children;
-
         if (!children) {
           return;
         }
-
         if (extract) {
           extract(children);
         }
@@ -229,47 +237,45 @@
       key: "handleChildrens",
       value: function handleChildrens() {
         var _this = this;
-
         var children = this.props.children;
-
         if (this.context.extract || !children) {
           return;
         }
-
-        var headComponent = React__default.createElement("div", {
+        var headComponent = /*#__PURE__*/React__default.createElement("div", {
           className: "react-head-temp"
         }, children);
-        ReactDOM.render(headComponent, this.temporaryElement, function () {
-          var childStr = _this.temporaryElement.innerHTML; //if html is not changed return
+        var root = ReactDOM.createRoot(this.temporaryElement);
+        root.render(function () {
+          var childStr = _this.temporaryElement.innerHTML;
 
+          //if html is not changed return
           if (_this.lastChildStr === childStr) {
             return;
           }
-
           _this.lastChildStr = childStr;
+          var tempHead = _this.temporaryElement.querySelector('.react-head-temp');
 
-          var tempHead = _this.temporaryElement.querySelector('.react-head-temp'); // .react-head-temp might not exist when triggered from async action
-
-
+          // .react-head-temp might not exist when triggered from async action
           if (tempHead === null) {
             return;
           }
-
           var childNodes = Array.prototype.slice.call(tempHead.children);
           var head = document.head;
-          var headHtml = head.innerHTML; //filter children remove if children has not been changed
+          var headHtml = head.innerHTML;
 
+          //filter children remove if children has not been changed
           childNodes = childNodes.filter(function (child) {
             return headHtml.indexOf(child.outerHTML) === -1;
-          }); //create clone of childNodes
+          });
 
+          //create clone of childNodes
           childNodes = childNodes.map(function (child) {
             return child.cloneNode(true);
-          }); //remove duplicate title and meta from head
+          });
 
+          //remove duplicate title and meta from head
           childNodes.forEach(function (child) {
             var tag = child.tagName.toLowerCase();
-
             if (tag === 'title') {
               var title = getDuplicateTitle();
               if (title) removeChild(head, title);
@@ -281,11 +287,12 @@
               var meta = getDuplicateMeta(child);
               if (meta) removeChild(head, meta);
             } else if (tag === 'link' && child.rel === 'canonical') {
-              var link = getDuplicateCanonical(child);
+              var link = getDuplicateCanonical();
               if (link) removeChild(head, link);
             }
           });
           appendChild(document.head, childNodes);
+          return headComponent;
         });
       }
     }, {
@@ -295,37 +302,29 @@
         return null;
       }
     }]);
-
     return MetaTags;
   }(React.Component);
-
   _defineProperty(MetaTags, "contextType", MetaContext);
 
-  var ReactTitle =
-  /*#__PURE__*/
-  function (_Component) {
+  var ReactTitle = /*#__PURE__*/function (_Component) {
     _inherits(ReactTitle, _Component);
-
     function ReactTitle() {
       _classCallCheck(this, ReactTitle);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(ReactTitle).apply(this, arguments));
+      return _callSuper(this, ReactTitle, arguments);
     }
-
     _createClass(ReactTitle, [{
       key: "render",
       value: function render() {
-        return React__default.createElement(MetaTags, null, React__default.createElement("title", null, this.props.title));
+        return /*#__PURE__*/React__default.createElement(MetaTags, null, /*#__PURE__*/React__default.createElement("title", null, this.props.title));
       }
     }]);
-
     return ReactTitle;
   }(React.Component);
 
-  exports.default = MetaTags;
   exports.MetaTags = MetaTags;
   exports.MetaTagsContext = MetaContextProviderWrapper;
   exports.ReactTitle = ReactTitle;
+  exports.default = MetaTags;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

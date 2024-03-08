@@ -47,8 +47,8 @@ class MetaTags extends Component {
     }
 
     const headComponent = <div className="react-head-temp">{children}</div>;
-
-    ReactDOM.render(headComponent, this.temporaryElement, () => {
+    const root = ReactDOM.createRoot(this.temporaryElement)
+    root.render(() => {
       const childStr = this.temporaryElement.innerHTML;
 
       //if html is not changed return
@@ -98,7 +98,8 @@ class MetaTags extends Component {
       });
 
       appendChild(document.head, childNodes);
-    });
+      return headComponent
+    })
   }
   render() {
     this.extractChildren();
